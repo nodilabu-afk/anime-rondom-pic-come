@@ -13,6 +13,10 @@ POPULAR = [
     "isagi yoichi","sung jinwoo"
 ]
 
+@app.get("/")
+def home():
+    return {"ok": True, "message": "Anime API running ✅", "endpoint": "/anime"}
+
 @app.get("/anime")
 def anime():
     name = random.choice(POPULAR)
@@ -20,7 +24,7 @@ def anime():
     data = requests.get(url).json()
 
     if not data.get("data"):
-        return {"ok": False, "message": "not found"}
+        return {"ok": False, "message": "Not found"}
 
     c = data["data"][0]
     return {
